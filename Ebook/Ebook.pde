@@ -1,6 +1,6 @@
 // Daniel Shiffman and Thomas Sanchez Lengeling
 // Tracking the average location beyond a given depth threshold
-// Thanks to Dan O'Sullivan //<>//
+// Thanks to Dan O'Sullivan //<>// //<>//
 
 // https://github.com/shiffman/OpenKinect-for-Processing
 // http://shiffman.net/p5/kinect/
@@ -9,13 +9,11 @@ import org.openkinect.processing.*;
 
 // The kinect stuff is happening in another class
 KinectTracker tracker;
-PImage bg;
 
 void setup() {
   size(640, 520);
 
   tracker = new KinectTracker(this);
-  bg = loadImage("sunset.jpg");
 }
 
 void draw() {
@@ -34,7 +32,7 @@ void draw() {
 
   // Let's draw the "lerped" location
   PVector v2 = tracker.getLerpedPos();
-  fill(100, 250, 50, 200);
+  fill(255, 91, 13, 200);
   noStroke();
   ellipse(v2.x, v2.y, 20, 20);
 

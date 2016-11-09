@@ -7,6 +7,9 @@
 // http://shiffman.net/p5/kinect/
 
 class KinectTracker {
+  
+  PImage fgImg;
+  PImage bgImg;
 
   // Depth threshold
   int threshold = 745;
@@ -39,6 +42,21 @@ class KinectTracker {
     // Set up the vectors
     loc = new PVector(0, 0);
     lerpedLoc = new PVector(0, 0);
+    
+    fgImg = loadImage("sunset.jpg");
+    bgImg = loadImage("bg.jpg");
+    
+    float fgImgNewW = map(fgImg.width,0, fgImg.width,0,display.width); 
+    float fgImgNewH = map(fgImg.height,0, fgImg.height,0,display.height); 
+    fgImg.resize((int)fgImgNewW,(int)fgImgNewH);
+    
+    float bgImgNewW = map(bgImg.width,0, bgImg.width,0,display.width); 
+    float bgImgNewH = map(bgImg.height,0, bgImg.height,0,display.height); 
+    fgImg.resize((int)bgImgNewW,(int)bgImgNewH);
+    
+    //pixel info
+    fgImg.loadPixels();
+    bgImg.loadPixels();
   }
 
   void track() {
@@ -103,9 +121,9 @@ class KinectTracker {
         int pix = x + y*display.width;
         if (rawDepth > 0 && rawDepth < threshold) {
           // A red color instead
-          display.pixels[pix] = color(150, 50, 50);
+          display.pixels[pix] = color(127,107,101);//fgImg.pixels[x*y];//color(150, 50, 50);
         } else {
-          display.pixels[pix] = img.pixels[offset];
+          display.pixels[pix] = bgImg.pixels[(bgImg.width - x - 1) + y * bgImg.width];//img.pixels[offset];
         }
       }
     }
