@@ -1,6 +1,6 @@
 // Daniel Shiffman and Thomas Sanchez Lengeling
 // Tracking the average location beyond a given depth threshold
-// Thanks to Dan O'Sullivan //<>//
+// Thanks to Dan O'Sullivan
 
 // https://github.com/shiffman/OpenKinect-for-Processing
 // http://shiffman.net/p5/kinect/
@@ -38,7 +38,7 @@ void draw() {
 
   // Display some info
   int t = tracker.getThreshold();
-  fill(255);
+  fill(0);
   text("threshold: " + t + "    " +  "framerate: " + int(frameRate) + "    " +
     "UP increase threshold, DOWN decrease threshold", 10, 500);
 }

@@ -10,7 +10,7 @@ class KinectTracker {
   
   PImage fgImg;
   PImage bgImg;
-  
+
   // Depth threshold
   int threshold = 745;
 
@@ -34,16 +34,10 @@ class KinectTracker {
     //enable Kinect2
     kinect2 = new Kinect2(pa);
     kinect2.initDepth();
-    kinect2.initVideo();
-    kinect2.initIR();
-    kinect2.initRegistered();
     kinect2.initDevice();
-
         
     // Make a blank image
     display = createImage(kinect2.depthWidth, kinect2.depthHeight, RGB);
-    //display = createImage(kinect2.getVideoImage().width, kinect2.getVideoImage().height, RGB);
-
     // Set up the vectors
     loc = new PVector(0, 0);
     lerpedLoc = new PVector(0, 0);
@@ -110,7 +104,6 @@ class KinectTracker {
 
   void display() {
     PImage img = kinect2.getDepthImage();
-    PImage kinectVImg = kinect2.getRegisteredImage();
 
     // Being overly cautious here
     if (depth == null || img == null) return;
@@ -126,8 +119,8 @@ class KinectTracker {
         int rawDepth = depth[offset];
         int pix = x + y*display.width;
         if (rawDepth > 0 && rawDepth < threshold) {
-          // forground
-          display.pixels[pix] = bgImg.pixels[(bgImg.width - x - 1) + y * bgImg.width];//kinectVImg.pixels[(kinectVImg.width - x - 1) + y * kinectVImg.width];//bgImg.pixels[(bgImg.width - x - 1) + y * bg.width];//color(127,107,101);//fgImg.pixels[x*y];//color(150, 50, 50);
+          // A red color instead
+          display.pixels[pix] = bgImg.pixels[(bgImg.width - x - 1) + y * bgImg.width];//color(127,107,101);//fgImg.pixels[x*y];//color(150, 50, 50);
         } else {
           display.pixels[pix] = color(0);//bgImg.pixels[(bgImg.width - x - 1) + y * bgImg.width];//img.pixels[offset];
         }
